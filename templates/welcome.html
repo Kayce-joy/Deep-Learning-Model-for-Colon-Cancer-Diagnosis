@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Early Detection of Colon Cancer</title>
+    <style>
+        /* Poppins Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        
+        /* Resetting margin, padding, and box-sizing for all elements */
+        *  {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Body Styles */
+    body {
+        background: url("{{ url_for('static', filename='colon-cancer-awareness (1).jpg') }}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        backdrop-filter: blur(3px);
+        font-size: 18px; /* increased font size to 18px */
+        padding-bottom: 100px;
+    }
+    
+    /* Header Styles */
+    header {
+        color: #fff;
+        font-size: 22px;
+        text-align: center;
+        padding: 20px 0;
+        background: linear-gradient(rgba(39,39,39, 0.6), transparent);
+        position: relative; /* Position relative to ensure nav is correctly positioned */
+        display: flex;
+        justify-content: space-between; /* Ensure header content is spread across the width */
+        align-items: center; /* Vertically align items in header */
+    }
+    
+    /* Navigation Styles */
+    nav {
+        display: flex;
+        justify-content: flex-end; /* Align nav items to the right */
+        padding: 0 50px; /* Add padding for spacing */
+    }      
+    
+    .header-nav {
+        display: flex;
+        align-items: center; /* Vertically align items */
+    }
+    
+    .header-nav li {
+        margin-left: 20px; /* Spacing between links */
+        list-style: none; /* Remove default list style */
+    }
+    
+    .header-nav a {
+        text-decoration: none;
+        color: #020202;
+        font-weight: 600;
+        padding: 10px;
+        display: inline-block;
+    }
+    
+    .header-nav a:hover {
+        border-bottom: 2px solid #030303; /* Underline effect on hover */
+    }
+    
+    .header-nav button {
+        background-color: #0e79d6;
+        color: #fff;
+        border: none;
+        border-radius: 30px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 18px;
+        margin-left: 20px;
+    }
+    
+    .header-nav button:hover {
+        background-color: #206fb4;
+    }
+        
+        /* Container for the form */
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: transparent;
+            border: 1px solid transparent;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-top: 60px; /* add some margin to separate from the previous section */
+            
+        }
+
+
+/* Styles for the content within the container */
+.content {
+    text-align: center; /* Center the content */
+    margin-bottom: 30px; /* Space below the content */
+}
+
+.content h2 {
+    font-size: 36px; /* Set the font size for the heading */
+    color: #206fb4; /* Set the color for the heading */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+.content p {
+    font-size: 20px; /* Set the font size for the paragraph */
+    color: #080808; /* Set the color for the paragraph */
+    margin-bottom: 20px; /* Space below the paragraph */
+}
+
+.content button {
+    background-color: #0e79d6;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 18px; /* Set the font size for the button */
+    margin-top: 20px; /* Space above the button */
+}
+
+.content button:hover {
+    background-color: #206fb4;
+}
+        
+        /* Info section styling */
+.info-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px; /* Adjust based on your preference */
+    margin: 0 auto 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-image {
+    max-width: 300px; /* Adjust based on your preference */
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.info-text {
+    max-width: 800px; /* Adjust based on your preference */
+    text-align: left;
+    height: 100%; /* Ensures the text section covers the container height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info-text h3 {
+    font-size: 28px;
+    color: #206fb4;
+    margin-bottom: 10px;
+}
+.info-text h4 {
+    font-size: 28px;
+    color: #206fb4;
+    margin-bottom: 10px;
+}
+
+.info-text p {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+        /* Form Section */
+        .form-section {
+    max-width: 600px;
+    width: 100%; /* Ensures the form section takes up the full width of its container */
+    margin: 0 auto; /* Centers the form section */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centers the content inside the form section */
+}
+        
+        #form-section h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #206fb4;
+            font-size: 36px; /* increased font size to 36px */
+        }
+        
+        #form-section form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        #form-section label {
+            margin-bottom: 10px;
+            font-size: 20px; /* increased font size to 20px */
+        }
+        
+        .form-section input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%; /* Ensures the input field takes up the full width of its container */
+    max-width: 300px; /* Sets a maximum width for the input field */
+    margin-bottom: 20px;
+}
+        
+        #form-section button[type="submit"] {
+            background-color: #0e79d6;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 24px; /* increased font size to 24px */
+            margin-top: 20px;
+        }
+        
+        #form-section button[type="submit"]:hover {
+            background-color: #206fb4;
+        }
+        .detect-button {
+    margin-top: 20px; /* Move the button up by reducing the margin */
+    margin-bottom: 20px; /* Ensure there's space below the button */
+}
+        /* Button Styles */
+        button {
+            background-color: #0e79d6;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 24px; /* increased font size to 24px */
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            background-color: #206fb4;
+        }
+        
+        /* Responsive Styles */
+        @media only screen and (max-width: 786px) {
+            .nav-button {
+                display: none;
+            }
+        
+            .nav-menu.responsive {
+                top: 100px;
+            }
+        
+            .nav-menu {
+                position: absolute;
+                top: -800px;
+                display: flex;
+                justify-content: center;
+                background: rgba(255, 255, 255, 0.2);
+                width: 100%;
+                height: 90vh;
+                backdrop-filter: blur(20px);
+                transition: .3s;
+            }
+        
+            .nav-menu ul {
+                flex-direction: column;
+                text-align: center;
+            }
+        
+            .nav-menu-btn {
+                display: block;
+            }
+        
+            .nav-menu-btn i {
+                font-size: 25px;
+                color: #fff;
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 50%;
+                cursor: pointer;
+                transition: .3s;
+            }
+        
+            .nav-menu-btn i:hover {
+                background: rgba(255, 255, 255, 0.15);
+            }
+        }
+        
+        @media only screen and (max-width: 540px) {
+            .wrapper {
+                min-height: 100vh;
+            }
+        
+            .form-box {
+                width: 100%;
+                height: 500px;
+            }
+        
+            .register-container, .login-container {
+                width: 100%;
+                padding: 0 20px;
+            }
+        
+            .register-container .two-forms {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Early Detection of Colon Cancer</h1>
+    <nav>
+        <ul class="header-nav">
+            <li><a href="#">Home</a></li>
+            <li><a href="#what-is-colon-cancer">About</a></li>
+            <li><button class="detect-button" onclick="scrollToForm()">Detect</button></li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+    <div class="content">
+        <h2>WELCOME TO ED-CRC</h2>
+        <p>Early detection is key to beating colon cancer.</p>
+        <button onclick="scrollToForm()">GET STARTED</button>
+    </div>
+</div>
+
+<div class="info-section" id="what-is-colon-cancer">
+    <img src="{{ url_for('static', filename='ccA.png') }}" alt="Colon Cancer Awareness" class="info-image">
+    <div class="info-text">
+        <h3>What is colon cancer?</h3>
+        <p>Colon cancer is a type of cancer that begins in the large intestine (colon). The colon is the final part of the digestive tract. Colon cancer typically affects older adults, though it can happen at any age. It usually begins as small,
+            noncancerous (benign) clumps of cells called polyps that form on the inside of the colon. 
+            Over time some of these polyps can become colon cancers. Polyps may be small and produce few,
+            if any, symptoms. For this reason, doctors recommend regular screening tests to help prevent colon cancer by
+            identifying and removing polyps before they turn into cancer. If colon cancer develops, many treatments are
+            available to help control it, including surgery, radiation therapy and drug treatments, such as chemotherapy,
+            targeted therapy and immunotherapy. Colon cancer is sometimes called colorectal cancer, which is a term that combines colon cancer and rectal cancer,
+            which begins in the rectum.</p>
+        <h4>What could cause this type of cancer?</h4>
+        <p>It occurs when healthy cells develop errors in their DNA. When the cells' genetic components are mutated, they
+            divide abnormally and accumulate in the colon to form a tumor. With time, the abnormal cells can invade the adjacent tissues and migrate to other organs (metastasis). Inherited gene mutations increase the risk of developing colon cancer.
+            Inherited colon cancer syndromes include familial adenomatous polyposis (FAP) and hereditary nonpolyposis
+            colorectal cancer (HNPCC). These syndromes are detected through genetic testing.</p>
+    </div>
+</div>
+
+<div class="form-section" id="form-section">
+    <form action="http://127.0.0.1:5000/predict" method="post" enctype="multipart/form-data">
+        <label for="image">Upload Image:</label>
+        <input type="file" id="image" name="file" required>
+        <button type="submit">Predict</button>
+    </form>
+    <div class="loading" style="display: none;">Loading...</div>
+    <div class="result-section">
+        <h2>Predicted Result:</h2>
+        {% if image_url %}
+            <img src="{{ image_url }}" alt="Uploaded image" width="300" height="300">
+        {% endif %}
+        <p>Predicted class: {{ prediction }}</p>
+    </div>
+</div>
+
+    <script>
+        function scrollToForm() {
+            var formSection = document.getElementById("form-section");
+            formSection.scrollIntoView({ behavior: "smooth" });
+        }
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    });
+});
+
+        function logout() {
+            window.location.href = "logout.php";
+        }
+
+        const form = document.getElementById('form-section').getElementsByTagName('form')[0];
+        form.addEventListener('submit', () => {
+            document.getElementsByClassName('loading')[0].style.display = 'block';
+        });
+
+        document.getElementById('predict-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            var formData = new FormData(this);
+            var xhr = new XMLHttpRequest();
+            var loading = document.getElementById('loading');
+            var resultImage = document.getElementById('result-image');
+            var resultText = document.getElementById('result-text');
+
+            xhr.open('POST', this.action, true);
+            xhr.onload = function () {
+                loading.style.display = 'none'; // Hide loading spinner
+
+                if (xhr.status === 200) {
+                    var response = xhr.responseText;
+                    var parser = new DOMParser();
+                    var doc = parser.parseFromString(response, 'text/html');
+                    
+                    // Extract image URL and prediction text from response
+                    var imageUrl = doc.querySelector('img').src;
+                    var predictionText = doc.querySelector('p').innerText;
+
+                    // Display the result
+                    resultImage.innerHTML = '<img src="' + imageUrl + '" alt="Uploaded image" width="300" height="300">';
+                    resultText.innerText = 'Predicted class: ' + predictionText;
+                } else {
+                    console.error('Error:', xhr.statusText);
+                }
+            };
+
+            xhr.onerror = function () {
+                console.error('Request failed');
+            };
+
+            loading.style.display = 'block'; // Show loading spinner
+            xhr.send(formData);
+        });
+    </script>
+</body>
+</html>
